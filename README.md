@@ -2,9 +2,9 @@
 
 Yleisiä linkkejä:
 
-* [Linkki sovellukseeni](https://www.cs.helsinki.fi)
-* [Linkki dokumentaatiooni](https://www.github.com)
+* [Linkki sovellukseeni](https://waxwax.cs.helsinki.fi/tsoha_uus)
+* [Linkki dokumentaatiooni](https://github.com/WaffeFIN/Tsoha-Bootstrap/blob/master/doc/dokumentaatio.pdf)
 
 ## Työn aihe
 
-Laita tähän aihekuvaus tai [linkki valmiiseen aiheeseen](http://advancedkittenry.github.io/suunnittelu_ja_tyoymparisto/aiheet/Pokemon-kanta.html) 
+Tehtäväarkisto. Opettaja / Ohjaaja lisää materiaalia, tehtäviä sekä niiden vastaukset tietokantaan, josta ne näkyy kursille ilmoittautuneille.
