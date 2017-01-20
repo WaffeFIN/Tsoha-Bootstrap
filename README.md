@@ -2,7 +2,7 @@
 
 Yleisiä linkkejä:
 
-* [Linkki sovellukseeni](https://waxwax.cs.helsinki.fi/tsoha_uus)
+* [Linkki sovellukseeni](https://waxwax.users.cs.helsinki.fi/tsoha_uus)
 * [Linkki dokumentaatiooni](https://github.com/WaffeFIN/Tsoha-Bootstrap/blob/master/doc/Tsohadoc.pdf)
 
 ## Työn aihe
