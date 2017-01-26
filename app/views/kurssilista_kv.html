@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Briiffi</h1>
+<h2>Kurssit (Kurssivastaava näkymä)</h2>
+<table class="table table-bordered table-striped">
+ <!--   <thead>
+        <tr>
+            <th>Nimi</th>
+            <th>Taulukko</th>
+        </tr>
+    </thead>-->
+    <tbody>
+        <tr>
+            <td>Ohjelmoinnin jatkokurssi</td>
+            <td><button class="btn btn-primary">Avaa</button></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Tietokantasovellus</td>
+            <td><button class="btn btn-primary">Avaa</button></td>
+            <td><button class="btn btn-default">Vastaukset arvosteltu</button></td>
+        </tr>
+        <tr>
+            <td>Tietokantojen perusteet</td>
+            <td><button class="btn btn-primary">Avaa</button></td>
+            <td><button class="btn btn-primary">Vastauksia arvostlematta</button></td>
+        </tr>
+        <tr>
+            <td>Cryptography and you</td>
+            <td><button class="btn btn-primary">Avaa</button></td>
+            <td><button class="btn btn-success">Julkaise kurssi</button></td>
+        </tr>
+        <tr>
+            <td><input type="text" class="form-control" placeholder="Uusi kurssi"></td>
+            <td><button class="btn btn-success">Luo</button></td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+{% endblock %}
