@@ -20,8 +20,8 @@ $routes->get('/kurssit_kv', function() {
 HelloWorldController::kurssi_lista_kv();
 });
 
-$routes->get('/kurssi/1', function() {
-HelloWorldController::kurssi();
+$routes->get('/kurssi/:id', function($id) {
+KurssiController::show($id);
 });
 
 $routes->get('/login', function() {
