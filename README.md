@@ -1,5 +1,7 @@
 # Tietokantasovelluksen esittelysivu
 
+## Moikka, läppärini kuoli juuri enkä ehtiny deployaa. Lisään vielä koodit gittiin
+
 Yleisiä linkkejä:
 
 * [Linkki sovellukseeni](https://waxwax.users.cs.helsinki.fi/tsoha_uus)
