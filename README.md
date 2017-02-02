@@ -1,6 +1,6 @@
 # Tietokantasovelluksen esittelysivu
 
-## Moikka, läppärini kuoli juuri enkä ehtiny deployaa. Lisään vielä koodit gittiin
+### Moikka, läppärini kuoli juuri enkä ehtiny deployaa. Lisään vielä koodit gittiin
 
 Yleisiä linkkejä:
 
@@ -19,6 +19,6 @@ http://waxwax.users.cs.helsinki.fi/tsoha_uus/kurssit_kv
 
 http://waxwax.users.cs.helsinki.fi/tsoha_uus/kurssi/1
 
-## Työn aihe
+### Työn aihe
 
 Tehtäväarkisto. Opettaja / Ohjaaja lisää materiaalia, tehtäviä sekä niiden vastaukset tietokantaan, josta ne näkyy kursille ilmoittautuneille.
