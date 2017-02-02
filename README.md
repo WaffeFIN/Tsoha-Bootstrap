@@ -1,6 +1,6 @@
 # Tietokantasovelluksen esittelysivu
 
-### Moikka, läppärini kuoli juuri enkä ehtiny deployaa. Lisään vielä koodit gittiin
+### Moikka, läppärini kuoli juuri enkä ehtiny deployaa (akku tyhjä ja laturi jossain [toivottavasti koulussa]). Lisään vielä koodit gittiin
 
 Yleisiä linkkejä:
 
