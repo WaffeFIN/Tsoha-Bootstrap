@@ -13,9 +13,10 @@ HelloWorldController::index();
 });
 
 $routes->get('/kurssit', function() {
-HelloWorldController::kurssi_lista();
+KurssiController::index();
 });
 
+//TODO: korjaa!
 $routes->get('/kurssit_kv', function() {
 HelloWorldController::kurssi_lista_kv();
 });
