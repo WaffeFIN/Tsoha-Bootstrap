@@ -10,21 +10,18 @@
         </tr>
     </thead>-->
     <tbody>
+        {% for kurssi in kurssit %}
         <tr>
-            <td>Ohjelmoinnin jatkokurssi</td>
-            <td><button class="btn btn-primary">Avaa</button></td>
-            <td><button class="btn btn-success">Ilmoittaudu</button></td>
+            <td>{{kurssi.nimi}}</td>
+            {% if kurssi.julkaistu %}
+            <td><a class="btn btn-primary" href="{{base_path}}/kurssi/{{kurssi.id}}">Avaa</a></td>
+            <td><a class="btn btn-success" href="{{base_path}}/kurssi/{{kurssi.id}}/ilmo">Ilmoittaudu</a></td>
+            {% else %}
+            <td></td>
+            <td></td>
+            {% endif %}
         </tr>
-        <tr>
-            <td>Tietokantasovellus</td>
-            <td><button class="btn btn-primary">Avaa</button></td>
-            <td>Olet ilmoittautunut kurssille</td>
-        </tr>
-        <tr>
-            <td>Tietokantojen perusteet</td>
-            <td><button class="btn btn-primary">Avaa</button></td>
-            <td><button class="btn btn-success">Ilmoittaudu</button></td>
-        </tr>
+        {% endfor %}
     </tbody>
 </table>
 {% endblock %}
