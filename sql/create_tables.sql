@@ -36,21 +36,20 @@ CREATE TABLE Oppitunti(
   tyyppi INTEGER DEFAULT 0
 );
 
+CREATE TABLE Tehtava(
+  id SERIAL PRIMARY KEY,
+  sarja_id INTEGER NOT NULL REFERENCES Oppitunti(id),
+  tehtavananto TEXT NOT NULL,
+  tehtavanumero VARCHAR(6)
+);
+
 CREATE TABLE Vastaus(
+  id SERIAL PRIMARY KEY,
   kayttaja_id INTEGER NOT NULL REFERENCES Kayttaja(id),
   tehtava_id INTEGER NOT NULL REFERENCES Tehtava(id),
   teksti TEXT,
   vastaus_pvm DATE NOT NULL
 );
-
-CREATE TABLE Tehtava(
-  id SERIAL PRIMARY KEY,
-  sarja_id INTEGER NOT NULL REFERENCES Oppitunti(id),
-  mallivastaus_id INTEGER REFERENCES Vastaus(id),
-  tehtavananto TEXT NOT NULL,
-  tehtavanumero VARCHAR(6)
-);
-
 
 
 
