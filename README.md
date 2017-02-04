@@ -1,6 +1,6 @@
 # Tietokantasovelluksen esittelysivu
 
-### Moikka, läppärini kuoli juuri enkä ehtiny deployaa (akku tyhjä ja laturi jossain (toivottavasti koulussa)). Lisään vielä koodit gittiin... Puuttuu olio-save, ja olion lisääminen tietokantaan. Toivon että ehdin koulussa perjantaina deployata ja debuggaa nopee.
+### Moikka, läppärini kuoli juuri enkä ehtiny deployaa (akku tyhjä ja laturi jossain (toivottavasti koulussa)). Lisään vielä koodit gittiin... Puuttuu olio-save, ja olion lisääminen tietokantaan. Toivon että ehdin koulussa perjantaina deployata ja debuggaa nopee. 4.2: Hommat korjattu ja deployattu, pahoittelen myöhästymistä
 
 Yleisiä linkkejä:
 
