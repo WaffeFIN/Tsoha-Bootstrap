@@ -1,9 +1,13 @@
 Mene osoitteeseen http://waxwax.users.cs.helsinki.fi/tsoha_uus/
 
+Sovelluksessa on kaksi käyttäjätasoa, opiskelija ja kurssivastaava.
 
-Tyypillisesti tässä riittää kertoa missä osoitteessa harjoitustyö on asennettuna ja millä voi kirjautua sisään.
+Opiskelija tunnukset:
+* oolli
+* noHashInBash
 
-Perusoletuksena on, että järjestelmän käyttäjä osaa käsitellä WWW-sivuja selaimella. Tähän liittyviä ohjeita ei siten tarvitse antaa. WWW-sovelluksen tulisi olla helppokäyttöinen ja intuitiivinen. Sivujen pitäisi itsessään sisältää riittävästi sivun käyttöön tarvittavaa informaatiota. Jos sivut ovat tällaisia, riittää antaa ohjelman käynnistykseen tarvittava URL sekä mahdolliset kirjautumiseen tarvittavat tunnukset. Jos käyttöön liittyy joitain yleisiä toimintajärjestykseen liittyviä asioita, ne voidaan kertoa tässä yhteydessä.
-Näiden tietojen tulisi löytyä myös tuotettavan järjestelmän sivuilta.
+Kurssivastaavan tunnukset:
+* pprof
+* jep
 
-Muista kertoa ohjaajalle kaikki testauksen vaatimat käyttäjätunnukset ja salasanat.
+Sovelluksessa juuri nyt on aineet, kurssit ja oppitunnit. Oppitunteja ei pysty katsomaan, mutta muut näkymät toimii. Voit kurssivastaavana lisätä kursseja ja julkaista/muokata/poistaa omat kurssisi. Opiskelijana ei vielä pysty tehdä muuta kuin avata kursseja.
