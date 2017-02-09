@@ -1,7 +1,7 @@
 -- Käyttäjät
-INSERT INTO Kayttaja (nimi, tunnus, salasana, oikeudet) VALUES ('Olli Opiskelija','oolli','noHashInBash',0);
-INSERT INTO Kayttaja (nimi, tunnus, salasana, oikeudet) VALUES ('Katriina Kurssivastaava','kkurs','pahaKunEiSalausta',1);
-INSERT INTO Kayttaja (nimi, tunnus, salasana, oikeudet) VALUES ('Pekka Professori','pprof','jep',1);
+INSERT INTO Kayttaja (nimi, kayttajatunnus, salasana, oikeudet) VALUES ('Olli Opiskelija','oolli','noHashInBash',0);
+INSERT INTO Kayttaja (nimi, kayttajatunnus, salasana, oikeudet) VALUES ('Katriina Kurssivastaava','kkurs','pahaKunEiSalausta',1);
+INSERT INTO Kayttaja (nimi, kayttajatunnus, salasana, oikeudet) VALUES ('Pekka Professori','pprof','jep',1);
 
 -- Aiheet
 INSERT INTO Aihe (nimi) VALUES ('Tietojenkäsittelytiede');
@@ -9,7 +9,7 @@ INSERT INTO Aihe (nimi) VALUES ('Matematiikka');
 
 -- Kurssit
 INSERT INTO Kurssi (aihe_id, kurssivastaava_id, nimi,julkaistu,lisays_pvm) VALUES (1,3,'Tietokantojen perusteet',TRUE,NOW());
-INSERT INTO Kurssi (aihe_id, kurssivastaava_id, nimi,julkaistu,lisays_pvm) VALUES (1,3,'Tietokantasovellus',TRUE,NOW());
+INSERT INTO Kurssi (aihe_id, kurssivastaava_id, nimi,yhteenveto,julkaistu,lisays_pvm) VALUES (1,3,'Tietokantasovellus','Tämä on yhteenveto :D Jee!',TRUE,NOW());
 INSERT INTO Kurssi (aihe_id, kurssivastaava_id, nimi,julkaistu,lisays_pvm) VALUES (1,2,'Johdatus tekoälyyn',TRUE,NOW());
 INSERT INTO Kurssi (aihe_id, kurssivastaava_id, nimi,julkaistu,lisays_pvm) VALUES (2,2,'Introduction to number theory',FALSE,NOW());
 

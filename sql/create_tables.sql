@@ -1,7 +1,7 @@
 CREATE TABLE Kayttaja(
   id SERIAL PRIMARY KEY,
   nimi TEXT NOT NULL,
-  tunnus VARCHAR(60) NOT NULL,
+  kayttajatunnus VARCHAR(60) NOT NULL,
   salasana VARCHAR(60) NOT NULL,
   oikeudet INTEGER DEFAULT 0
 );
@@ -16,6 +16,7 @@ CREATE TABLE Kurssi(
   aihe_id INTEGER NOT NULL REFERENCES Aihe(id),
   kurssivastaava_id INTEGER NOT NULL REFERENCES Kayttaja(id),
   nimi VARCHAR(120) NOT NULL,
+  yhteenveto TEXT,
   julkaistu boolean DEFAULT FALSE,
   lisays_pvm DATE
 );
@@ -31,7 +32,7 @@ CREATE TABLE Oppitunti(
   id SERIAL PRIMARY KEY,
   kurssi_id INTEGER NOT NULL REFERENCES Kurssi(id),
   otsikko VARCHAR(120) NOT NULL,
-  materiaali TEXT NOT NULL,
+  materiaali TEXT,
   rivi INTEGER DEFAULT 0,
   tyyppi INTEGER DEFAULT 0
 );

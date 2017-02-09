@@ -1,24 +1,21 @@
 {% extends "base.html" %}
 {% block content %}
 <h1>Briiffi</h1>
-<h2>Kurssit (Opiskelija näkymä)</h2>
+<h2>Kurssit (Wanhentunut näkymä)</h2>
 <table class="table table-bordered table-striped">
- <!--   <thead>
-        <tr>
-            <th>Nimi</th>
-            <th>Taulukko</th>
-        </tr>
-    </thead>-->
+    <!--   <thead>
+           <tr>
+               <th>Nimi</th>
+               <th>Taulukko</th>
+           </tr>
+       </thead>-->
     <tbody>
         {% for kurssi in kurssit %}
         <tr>
-            <td>{{kurssi.nimi}}</td>
             {% if kurssi.julkaistu %}
+            <td>{{kurssi.nimi}}</td>
             <td><a class="btn btn-primary" href="{{base_path}}/kurssi/{{kurssi.id}}">Avaa</a></td>
             <td><a class="btn btn-success" href="{{base_path}}/kurssi/{{kurssi.id}}/ilmo">Ilmoittaudu</a></td>
-            {% else %}
-            <td></td>
-            <td></td>
             {% endif %}
         </tr>
         {% endfor %}

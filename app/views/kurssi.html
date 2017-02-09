@@ -1,27 +1,51 @@
-{% extends "base.html" %}
+{% extends "base.html" %} 
 {% block content %}
 <h1>Briiffi</h1>
-<h2>Tietokantasovellus</h2>
+<h2>{{kurssi.nimi}}</h2>
 <section>
-    Tämä on mahtava kurssi jne. jne. (mutta oikeesti hyvä ;) )
-    Tektsiä plaplapla plaplapla plaplapla plaplapla plaplapla
-    Tänne pieni yhteenveto    
+    {{kurssi.yhteenveto}}
 </section>
 
 <table class="table table-bordered table-striped">
     <tbody>
+        {% if oppitunnit %}
+        {% for oppitunti in oppitunnit %}
+        <tr> <!-- add tr /tr per row, set row value, if no oppitunti is found for row, terminate -->
+            {% if oppitunti.tyyppi %}
+            <td><a class="btn btn-danger" href="{{base_path}}/oppitunti/{{oppitunti.id}}">{{oppitunti.otsikko}}</a></td>
+            {% else %}
+            <td><a class="btn btn-primary" href="{{base_path}}/oppitunti/{{oppitunti.id}}">{{oppitunti.otsikko}}</a></td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+        {% else %}
         <tr>
-            <td><button class="btn btn-primary">Oppitunti 1</button></td>
-            <td><button class="btn btn-danger">Tehtäväsarja 1</button></td>
-            <td></td>
+            <td>Kurssilla ei ole julkaistuja oppitunteja tai tehtäväsarjoja.</td>
+        </tr>
+        {% endif %}
+        {% if user_logged_in and user_logged_in.id == kurssi.kurssivastaava_id%}
+        <tr>
+            <td>
+                <a class="btn btn-default" href="{{base_path}}/uusi_ot/{{kurssi.id}}">Lisää uusi oppitunti</a>
+            </td>
         </tr>
         <tr>
-            <td><button class="btn btn-primary">Oppitunti 2a</button></td>
-            <td><button class="btn btn-primary">Oppitunti 2b</button></td>
-            <td><button class="btn btn-danger">Tehtäväsarja 2</button></td>
+            <td>
+                <a class="btn btn-default" href="{{base_path}}/uusi_ts/{{kurssi.id}}">Lisää uusi tehtäväsarja</a>
+            </td>
         </tr>
+        <tr>
+            <td>
+                <form method="post" action="{{base_path}}/poisto">
+                    <input type="hidden" name="aihe_id" value="{{kurssi.aihe_id}}">
+                    <input type="hidden" name="kurssi_id" value="{{kurssi.id}}">
+                    <button type="submit" class="btn btn-danger">Poista kurssi</button>
+                </form>
+            </td>
+        </tr>
+        {% endif %}
     </tbody>
 </table>
 
-<button class="btn btn-default">Takaisin</button>
+<a class="btn btn-default" href="{{base_path}}/kurssit/{{kurssi.aihe_id}}">Takaisin</a>
 {% endblock %}

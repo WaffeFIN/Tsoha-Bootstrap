@@ -32,7 +32,7 @@
                         <span class="icon-bar"></span>
                     </button>
                     <!-- Sovelluksen nimi -->
-                    <a class="navbar-brand" href="#">Briiffi</a>
+                    <a class="navbar-brand" href="{{base_path}}/">Briiffi</a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="navigation">
@@ -40,17 +40,20 @@
                         <li><a href="{{base_path}}/aiheet">Aiheet</a></li>
                     </ul>
                     <ul class="nav navbar-nav">
-                        <li><a href="{{base_path}}/kurssit">Kurssit</a></li>
+                        <li><a href="{{base_path}}/kurssit/1">TKT Kurssit</a></li>
                     </ul>
                     <ul class="nav navbar-nav">
-                        <li><a href="{{base_path}}/kurssit_kv">Kurssit, ope-mode</a></li>
+                        <li><a href="{{base_path}}/kurssi/2">Tsoha</a></li>
                     </ul>
-                    <ul class="nav navbar-nav">
-                        <li><a href="{{base_path}}/kurssi/1">Tsoha</a></li>
-                    </ul>
+                    {% if user_logged_in %}
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="{{base_path}}/login">Kirjaudu sisään</a></li>
+                        <li><p>Tervetuloa, {{user_logged_in.nimi}}</p></li>
                     </ul>
+                    {% else %}
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="{{base_path}}/">Kirjaudu sisään</a></li>
+                    </ul>
+                    {% endif %}
                 </div>
             </div>
         </nav>
