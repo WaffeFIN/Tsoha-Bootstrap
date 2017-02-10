@@ -5,9 +5,10 @@ Yleisiä linkkejä:
 * [Linkki sovellukseeni](https://waxwax.users.cs.helsinki.fi/tsoha_uus)
 * [Linkki dokumentaatiooni](https://github.com/WaffeFIN/Tsoha-Bootstrap/blob/master/doc/Tsohadoc.pdf)
 
-Opiskelija käyttäjätunnus: oolli, noHashInBash
-
-Kurssivastaava kt: pprof, jep
+Käyttäjätunnukset
+* Opiskelija: oolli, noHashInBash
+* Kurssivastaava #1: pprof, jep
+* Kurssivastaava #2: kkurs, pahaKunEiSalausta
 
 ### Työn aihe
 
