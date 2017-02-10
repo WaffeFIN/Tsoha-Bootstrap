@@ -26,7 +26,7 @@ class BaseModel {
 
     public static function validate_string_length($string, $min, $max) {
         $len = strlen($string);
-        if ($len >= $min && $len < $max) {
+        if ($len >= $min && $len <= $max) {
             return false;
         } else {
             return true;

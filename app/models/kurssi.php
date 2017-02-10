@@ -79,12 +79,16 @@ class Kurssi extends BaseModel {
             $errors[] = 'Kurssin nimi ei saa olla tyhjä!';
         }
         if ($this->validate_string_length($this->nimi, 6, 120)) {
-            $errors[] = 'Kurssin nimen pituus on oltava vähintään kuusi merkkiä ja enintään 120 merkkiä!';
+            $errors[] = 'Kurssin nimen pituus on oltava vähintään kuusi (6) merkkiä ja enintään 120 merkkiä!';
         }
         return $errors;
     }
 
     public function destroy() {
+        $oppitunnit = Oppitunti::allKurssi($this->id);
+        foreach ($oppitunnit as $oppitunti) {
+            $oppitunti->destroy();
+        }
         $query = DB::connection()->prepare('DELETE FROM Kurssi WHERE id = :id');
         $query->execute(array('id' => $this->id));
     }
@@ -92,6 +96,11 @@ class Kurssi extends BaseModel {
     public function publish() {
         $query = DB::connection()->prepare('UPDATE Kurssi SET julkaistu=:true WHERE id=:id');
         $query->execute(array('id' => $this->id, 'true' => 'TRUE'));
+    }
+
+    public function hide() {
+        $query = DB::connection()->prepare('UPDATE Kurssi SET julkaistu=:false WHERE id=:id');
+        $query->execute(array('id' => $this->id, 'false' => 'FALSE'));
     }
 
     public function save() {

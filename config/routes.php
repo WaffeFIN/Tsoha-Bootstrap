@@ -33,16 +33,19 @@ $routes->post('/uusi', function() {
 });
 
 $routes->get('/uusi_ot/:id', function($id) {
-    OppituntiController::uusi_oppitunti($id);
+    OppituntiController::uusi(0, $id);
 });
 
 $routes->get('/uusi_ts/:id', function($id) {
-    OppituntiController::uusi_tehtavasarja($id);
+    OppituntiController::uusi(1, $id);
 });
 
+$routes->post('/julkaise', function() {
+    KurssiController::publish();
+});
 
-$routes->get('/kurssi/:id/julkaise', function($id) {
-    KurssiController::publish($id);
+$routes->post('/piillota', function() {
+    KurssiController::hide();
 });
 
 $routes->get('/kurssi/:id', function($id) {
@@ -51,4 +54,8 @@ $routes->get('/kurssi/:id', function($id) {
 
 $routes->post('/kurssi', function() {
     KurssiController::store();
+});
+
+$routes->get('/oppitunti/:id', function($id) {
+    OppituntiController::show($id);
 });

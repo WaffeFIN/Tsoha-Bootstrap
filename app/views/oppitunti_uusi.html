@@ -1,7 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
 <h1>Briiffi</h1>
+{% if tyyppi==0 %}
 <h2>Lisää oppitunti kurssille {{kurssi.nimi}}</h2>
+{% else %}
+<h2>Lisää tehtäväsarja kurssille {{kurssi.nimi}}</h2>
+{% endif %}
 
 <form method="post" action="{{base_path}}/uusi">
     <div class="form-group">
@@ -10,12 +14,16 @@
     </div>
 
     <div class="form-group">
+        {% if tyyppi==0 %}
         <label>Leipäteksti</label>
+        {% else %}
+        <label>Aliotsikko/Yhteenveto</label>
+        {% endif %}
         <textarea name="materiaali" class="form-control"></textarea>
     </div>
 
     <input type="hidden" name="kurssi_id" value="{{kurssi.id}}">
-    <input type="hidden" name="tyyppi" value=0>
+    <input type="hidden" name="tyyppi" value="{{tyyppi}}">
 
     <div class="form-group">
         <button type="submit" class="btn btn-primary">Lisää</button>

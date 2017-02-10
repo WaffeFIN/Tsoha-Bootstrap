@@ -29,7 +29,7 @@ class Oppitunti extends BaseModel {
         return $oppitunnit;
     }
 
-    public static function allKurssi($kurssi_id) {
+    public static function allKurssi($kurssi_id) {//REMOVE
         $query = DB::connection()->prepare('SELECT * FROM Oppitunti WHERE kurssi_id = :kurssi_id');
         $query->execute(array('kurssi_id' => $kurssi_id));
         $rows = $query->fetchAll();
@@ -55,7 +55,7 @@ class Oppitunti extends BaseModel {
         $row = $query->fetch();
 
         if ($row) {
-            $oppitunti[] = new Oppitunti(array(
+            $oppitunti = new Oppitunti(array(
                 'id' => $row['id'],
                 'kurssi_id' => $row['kurssi_id'],
                 'otsikko' => $row['otsikko'],
@@ -93,12 +93,17 @@ class Oppitunti extends BaseModel {
     public function validate_otsikko() {
         $errors = array();
         if ($this->validate_string($this->otsikko)) {
-            $errors[] = 'Kurssin nimi ei saa olla tyhjä!';
+            $errors[] = 'Otsikko ei saa olla tyhjä!';
         }
         if ($this->validate_string_length($this->otsikko, 2, 60)) {
-            $errors[] = 'Kurssin nimen pituus on oltava vähintään kaksi merkkiä ja enintään 60 merkkiä!';
+            $errors[] = 'Otsikon pituus on oltava vähintään kaksi (2) merkkiä ja enintään 60 merkkiä!';
         }
         return $errors;
+    }
+
+    public function destroy() {
+        $query = DB::connection()->prepare('DELETE FROM Oppitunti WHERE id = :id');
+        $query->execute(array('id' => $this->id));
     }
 
     public function save() {

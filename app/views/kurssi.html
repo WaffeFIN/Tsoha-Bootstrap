@@ -2,6 +2,23 @@
 {% block content %}
 <h1>Briiffi</h1>
 <h2>{{kurssi.nimi}}</h2>
+
+{% if message %}
+<div class="alert alert-info">
+    {{message}}
+</div>
+{% endif %}
+
+{% if errors %}
+<div class="alert alert-danger">
+    <ul>
+        {% for error in errors %}
+        <li>{{error}}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+
 <section>
     {{kurssi.yhteenveto}}
 </section>
@@ -36,11 +53,18 @@
         </tr>
         <tr>
             <td>
+                {% if kurssi.julkaistu %}
+                <form method="post" action="{{base_path}}/piillota">
+                    <input type="hidden" name="kurssi_id" value="{{kurssi.id}}">
+                    <td><button type="submit" class="btn btn-danger">Piilota kurssi</button></td>
+                </form>
+                {% else %}
                 <form method="post" action="{{base_path}}/poisto">
                     <input type="hidden" name="aihe_id" value="{{kurssi.aihe_id}}">
                     <input type="hidden" name="kurssi_id" value="{{kurssi.id}}">
-                    <button type="submit" class="btn btn-danger">Poista kurssi</button>
+                    <td><button type="submit" class="btn btn-danger">Poista kurssi</button></td>
                 </form>
+                {% endif %}
             </td>
         </tr>
         {% endif %}

@@ -2,17 +2,22 @@
 
 require 'app/models/kurssi.php';
 require 'app/models/oppitunti.php';
+require 'app/models/tehtava.php';
 
 class OppituntiController extends BaseController {
 
-    public static function uusi_oppitunti($id) {
+    public static function uusi($tyyppi, $id) {
         $kurssi = Kurssi::find($id);
-        View::make('oppitunti_uusi.html', array('kurssi' => $kurssi));
+        View::make('oppitunti_uusi.html', array('tyyppi' => $tyyppi, 'kurssi' => $kurssi));
     }
 
-    public static function uusi_tehtavasarja($id) {
-        $kurssi = Kurssi::find($id);
-        View::make('oppitunti_uusi_ts.html', array('kurssi' => $kurssi));
+    public static function show($id) {
+        $oppitunti = Oppitunti::find($id);
+        $tehtavat = Tehtava::oppituntiTehtavat($id);
+        View::make('oppitunti.html', array(
+            'oppitunti' => $oppitunti,
+            'tehtavat' => $tehtavat
+        ));
     }
 
     public static function store() {
@@ -26,7 +31,7 @@ class OppituntiController extends BaseController {
         );
         $oppitunti = new Oppitunti($attributes);
         $errors = $oppitunti->errors();
-        
+
         $id = $params['kurssi_id'];
         $kurssi = Kurssi::find($id);
 

@@ -3,6 +3,12 @@
 <h1>Briiffi</h1>
 <h2>Kurssit</h2>
 
+{% if message %}
+<div class="alert alert-info">
+    {{message}}
+</div>
+{% endif %}
+
 {% if errors %}
 <div class="alert alert-danger">
     <ul>
@@ -18,37 +24,40 @@
         {% for kurssi in kurssit %}
         <tr>
             {% if kurssi.julkaistu %}
-                <td>{{kurssi.nimi}}</td>
-                <td><a class="btn btn-primary" href="{{base_path}}/kurssi/{{kurssi.id}}">Avaa</a></td>
-                {% if user_logged_in and user_logged_in.oikeudet == 0 %}
-                <td><a class="btn btn-success" href="{{base_path}}/kurssi/{{kurssi.id}}/ilmo">Ilmoittaudu</a></td>
-                {% else %}
-                <td></td>
-                {% endif %}
+            <td>{{kurssi.nimi}}</td>
+            <td><a class="btn btn-primary" href="{{base_path}}/kurssi/{{kurssi.id}}">Avaa</a></td>
+            {% if user_logged_in and user_logged_in.oikeudet == 0 %}
+            <td><a class="btn btn-success" href="{{base_path}}/kurssi/{{kurssi.id}}/ilmo">Ilmoittaudu</a></td>
             {% else %}
-                {% if user_logged_in and user_logged_in.oikeudet == 1 %}
-                    <td>{{kurssi.nimi}}</td>
-                    <td><a class="btn btn-primary" href="{{base_path}}/kurssi/{{kurssi.id}}">Avaa</a></td>
-                    {% if user_logged_in.id == kurssi.kurssivastaava_id %}
-                    <td><a class="btn btn-success" href="{{base_path}}/kurssi/{{kurssi.id}}/julkaise">Julkaise</a></td>
-                    {% else %}
-                    <td></td>
-                    {% endif %}
-                {% endif %}
+            <td></td>
             {% endif %}
-        </tr>
-        {% endfor %}
-        {% if user_logged_in and user_logged_in.oikeudet == 1 %}
-        <tr>
-            <form method="post" action="{{base_path}}/kurssi">
-                <td><input type="text" name="nimi" class="form-control" placeholder="Lisää kurssi"></td>
-                <input type="hidden" name="kurssivastaava_id" value="{{user_logged_in.id}}">
-                <input type="hidden" name="aihe_id" value="{{aihe_id}}">
-                <td><button type="submit" class="btn btn-success">Luo</button></td>
-                <td></td>
-            </form>
-        </tr>
-        {% endif %}
+            {% else %}
+            {% if user_logged_in and user_logged_in.oikeudet == 1 %}
+            <td>{{kurssi.nimi}}</td>
+            <td><a class="btn btn-primary" href="{{base_path}}/kurssi/{{kurssi.id}}">Avaa</a></td>
+            {% if user_logged_in.id == kurssi.kurssivastaava_id %}
+    <form method="post" action="{{base_path}}/julkaise">
+        <input type="hidden" name="kurssi_id" value="{{kurssi.id}}">
+        <td><button type="submit" class="btn btn-success">Julkaise</a></td>
+    </form>
+    {% else %}
+    <td></td>
+    {% endif %}
+    {% endif %}
+    {% endif %}
+</tr>
+{% endfor %}
+{% if user_logged_in and user_logged_in.oikeudet == 1 %}
+<tr>
+<form method="post" action="{{base_path}}/kurssi">
+    <td><input type="text" name="nimi" class="form-control" placeholder="Lisää kurssi"></td>
+    <input type="hidden" name="kurssivastaava_id" value="{{user_logged_in.id}}">
+    <input type="hidden" name="aihe_id" value="{{aihe_id}}">
+    <td><button type="submit" class="btn btn-success">Luo</button></td>
+    <td></td>
+</form>
+</tr>
+{% endif %}
 </tbody>
 </table>
 {% endblock %}

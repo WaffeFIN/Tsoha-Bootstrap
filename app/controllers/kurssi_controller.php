@@ -33,10 +33,18 @@ class KurssiController extends BaseController {
         Redirect::to('/kurssit/' . $params['aihe_id'], array('message' => 'Kurssi on poistettu onnistuneesti!'));
     }
 
-    public static function publish($id) {
-        $kurssi = Kurssi::find($id);
+    public static function publish() {
+        $params = $_POST;
+        $kurssi = Kurssi::find($params['kurssi_id']);
         $kurssi->publish();
         Redirect::to('/kurssit/' . $kurssi->aihe_id, array('message' => 'Kurssi ' . ($kurssi->nimi) . ' on julkaistu!'));
+    }
+
+    public static function hide() {
+        $params = $_POST;
+        $kurssi = Kurssi::find($params['kurssi_id']);
+        $kurssi->hide();
+        Redirect::to('/kurssi/' . $kurssi->id, array('message' => 'Kurssi ' . ($kurssi->nimi) . ' on piillotettu!'));
     }
 
     public static function store() {
@@ -56,7 +64,7 @@ class KurssiController extends BaseController {
 
             Redirect::to('/kurssi/' . $kurssi->id, array('message' => 'Kurssi lisätty!'));
         } else {
-            $aihe_id = 1;
+            $aihe_id = $params['aihe_id'];
             $kurssit = Kurssi::allAihe($aihe_id);
             View::make('kurssilista_kv.html', array(
                 'aihe_id' => $aihe_id,
