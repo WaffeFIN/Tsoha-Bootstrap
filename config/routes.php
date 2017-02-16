@@ -8,10 +8,6 @@ $routes->post('/login', function() {
     UserController::handle_login();
 });
 
-$routes->get('/hiekkalaatikko', function() {
-    MainController::sandbox();
-});
-
 $routes->get('/aiheet', function() {
     AiheController::index();
 });
