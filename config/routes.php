@@ -8,6 +8,14 @@ $routes->post('/login', function() {
     UserController::handle_login();
 });
 
+$routes->post('/logout', function() {
+    UserController::logout();
+});
+
+$routes->get('/kayttaja', function() {
+    UserController::index();
+});
+
 $routes->get('/aiheet', function() {
     AiheController::index();
 });
@@ -34,6 +42,14 @@ $routes->get('/uusi_ot/:id', function($id) {
 
 $routes->get('/uusi_ts/:id', function($id) {
     OppituntiController::uusi(1, $id);
+});
+
+$routes->post('/ilmo', function() {
+    IlmoController::signup();
+});
+
+$routes->post('/peru_ilmo', function() {
+    IlmoController::destroy();
 });
 
 $routes->post('/julkaise', function() {

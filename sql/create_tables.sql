@@ -21,10 +21,10 @@ CREATE TABLE Kurssi(
   lisays_pvm DATE
 );
 
-CREATE TABLE Ilmoittauminen(
+CREATE TABLE Ilmoittautuminen(
   kayttaja_id INTEGER NOT NULL REFERENCES Kayttaja(id),
   kurssi_id INTEGER NOT NULL REFERENCES Kurssi(id),
-  ilmoittautumis_pvm DATE
+  paivays DATE
 );
 
 

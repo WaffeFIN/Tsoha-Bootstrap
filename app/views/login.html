@@ -3,6 +3,12 @@
 <h1>Briiffi</h1>
 <h2>Kirjaudu</h2>
 
+{% if message %}
+<div class="alert alert-info">
+    {{message}}
+</div>
+{% endif %}
+
 <form method="post" action="{{base_path}}/login">
     <div class="form-group">
         <label>Käyttäjätunnus</label>

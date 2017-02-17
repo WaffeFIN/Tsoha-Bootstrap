@@ -7,6 +7,7 @@ require 'app/models/tehtava.php';
 class OppituntiController extends BaseController {
 
     public static function uusi($tyyppi, $id) {
+        self::check_logged_in();
         $kurssi = Kurssi::find($id);
         View::make('oppitunti_uusi.html', array('tyyppi' => $tyyppi, 'kurssi' => $kurssi));
     }
@@ -21,6 +22,7 @@ class OppituntiController extends BaseController {
     }
 
     public static function store() {
+        self::check_logged_in();
         $params = $_POST;
 
         $attributes = array(

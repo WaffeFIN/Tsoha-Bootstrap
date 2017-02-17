@@ -10,30 +10,31 @@ class KurssiController extends BaseController {
         View::make('kurssilista_kv.html', array('aihe_id' => $aihe_id, 'kurssit' => $kurssit));
     }
 
-    public static function index_old($aihe_id) { //TO BE DELETED
-        $kurssit = Kurssi::allAihe($aihe_id);
-        View::make('kurssilista_op.html', array('aihe_id' => $aihe_id, 'kurssit' => $kurssit));
-    }
-
     public static function show($id) {
         $kurssi = Kurssi::find($id);
-        $oppitunnit = Oppitunti::kurssiOppitunnit($id);
-        View::make('kurssi.html', array(
-            'kurssi' => $kurssi,
-            'oppitunnit' => $oppitunnit
-        ));
+        if ($kurssi == null) {
+            Redirect::to('/', array('message' => 'Kurssia ei löytynyt id:llä ' . $id));
+        } else {
+            $oppitunnit = Oppitunti::kurssiOppitunnit($id);
+            View::make('kurssi.html', array(
+                'kurssi' => $kurssi,
+                'oppitunnit' => $oppitunnit
+            ));
+        }
     }
 
     public static function destroy() {
+        self::check_logged_in();
         $params = $_POST;
 
         $kurssi = Kurssi::find($params['kurssi_id']);
         $kurssi->destroy();
 
-        Redirect::to('/kurssit/' . $params['aihe_id'], array('message' => 'Kurssi on poistettu onnistuneesti!'));
+        Redirect::to('/kurssit/' . $params['aihe_id'], array('message' => 'Kurssi poistettiin onnistuneesti!'));
     }
 
     public static function publish() {
+        self::check_logged_in();
         $params = $_POST;
         $kurssi = Kurssi::find($params['kurssi_id']);
         $kurssi->publish();
@@ -41,6 +42,7 @@ class KurssiController extends BaseController {
     }
 
     public static function hide() {
+        self::check_logged_in();
         $params = $_POST;
         $kurssi = Kurssi::find($params['kurssi_id']);
         $kurssi->hide();
@@ -48,6 +50,7 @@ class KurssiController extends BaseController {
     }
 
     public static function store() {
+        self::check_logged_in();
         $params = $_POST;
 
         $attributes = array(

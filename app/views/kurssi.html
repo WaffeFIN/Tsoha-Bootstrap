@@ -19,11 +19,14 @@
 </div>
 {% endif %}
 
-<section>
-    {{kurssi.yhteenveto}}
-</section>
-
 <table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <td>
+                {{kurssi.yhteenveto}}
+            </td>
+        </tr>
+    </thead>
     <tbody>
         {% if oppitunnit %}
         {% for oppitunti in oppitunnit %}
@@ -59,7 +62,7 @@
                     <td><button type="submit" class="btn btn-danger">Piilota kurssi</button></td>
                 </form>
                 {% else %}
-                <form method="post" action="{{base_path}}/poisto">
+                <form method="post" action="{{base_path}}/poisto" class="destroy-form" data-confirm="Oletko varma, että haluat pysyvästi poistaa kurssin {{kurssi.nimi}}?">
                     <input type="hidden" name="aihe_id" value="{{kurssi.aihe_id}}">
                     <input type="hidden" name="kurssi_id" value="{{kurssi.id}}">
                     <td><button type="submit" class="btn btn-danger">Poista kurssi</button></td>

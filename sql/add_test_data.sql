@@ -14,7 +14,7 @@ INSERT INTO Kurssi (aihe_id, kurssivastaava_id, nimi,julkaistu,lisays_pvm) VALUE
 INSERT INTO Kurssi (aihe_id, kurssivastaava_id, nimi,julkaistu,lisays_pvm) VALUES (2,2,'Introduction to number theory',FALSE,NOW());
 
 -- Ilmoittautumiset
-INSERT INTO Ilmoittauminen (kayttaja_id, kurssi_id, ilmoittautumis_pvm) VALUES (1,2,NOW());
+INSERT INTO Ilmoittautuminen (kayttaja_id, kurssi_id, paivays) VALUES (1,2,NOW());
 
 -- Oppitunnit
 INSERT INTO Oppitunti (kurssi_id, otsikko, materiaali, tyyppi) VALUES (2, 'Viikko 2: Tee sql jutut', 'Viikko 2: Hei jou tee nää create ja drop taablit sekä testi datan lisäys. + Kaaviot', 1);

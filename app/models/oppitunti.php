@@ -9,10 +9,7 @@ class Oppitunti extends BaseModel {
         $this->validators = array('validate_otsikko');
     }
 
-    public static function all() {
-        $query = DB::connection()->prepare('SELECT * FROM Oppitunti');
-        $query->execute();
-        $rows = $query->fetchAll();
+    public static function oppitunnitFromRows($rows) {
         $oppitunnit = array();
 
         foreach ($rows as $row) {
@@ -25,35 +22,10 @@ class Oppitunti extends BaseModel {
                 'tyyppi' => $row['tyyppi']
             ));
         }
-
         return $oppitunnit;
     }
 
-    public static function allKurssi($kurssi_id) {//REMOVE
-        $query = DB::connection()->prepare('SELECT * FROM Oppitunti WHERE kurssi_id = :kurssi_id');
-        $query->execute(array('kurssi_id' => $kurssi_id));
-        $rows = $query->fetchAll();
-        $oppitunnit = array();
-
-        foreach ($rows as $row) {
-            $oppitunnit[] = new Oppitunti(array(
-                'id' => $row['id'],
-                'kurssi_id' => $row['kurssi_id'],
-                'otsikko' => $row['otsikko'],
-                'materiaali' => $row['materiaali'],
-                'rivi' => $row['rivi'],
-                'tyyppi' => $row['tyyppi']
-            ));
-        }
-
-        return $oppitunnit;
-    }
-
-    public static function find($id) {
-        $query = DB::connection()->prepare('SELECT * FROM Oppitunti WHERE id = :id LIMIT 1');
-        $query->execute(array('id' => $id));
-        $row = $query->fetch();
-
+    public static function oppituntiFromRow($row) {
         if ($row) {
             $oppitunti = new Oppitunti(array(
                 'id' => $row['id'],
@@ -70,23 +42,35 @@ class Oppitunti extends BaseModel {
         return null;
     }
 
+    public static function all() {
+        $query = DB::connection()->prepare('SELECT * FROM Oppitunti');
+        $query->execute();
+        $rows = $query->fetchAll();
+        $oppitunnit = Oppitunti::oppitunnitFromRows($rows);
+        return $oppitunnit;
+    }
+
+    public static function allKurssi($kurssi_id) {
+        $query = DB::connection()->prepare('SELECT * FROM Oppitunti WHERE kurssi_id = :kurssi_id');
+        $query->execute(array('kurssi_id' => $kurssi_id));
+        $rows = $query->fetchAll();
+        $oppitunnit = Oppitunti::oppitunnitFromRows($rows);
+        return $oppitunnit;
+    }
+
+    public static function find($id) {
+        $query = DB::connection()->prepare('SELECT * FROM Oppitunti WHERE id = :id LIMIT 1');
+        $query->execute(array('id' => $id));
+        $row = $query->fetch();
+        $oppitunti = Oppitunti::oppituntiFromRow($row);
+        return $oppitunti;
+    }
+
     public static function kurssiOppitunnit($kurssi_id) {
         $query = DB::connection()->prepare('SELECT * FROM Oppitunti WHERE kurssi_id = :kurssi_id');
         $query->execute(array('kurssi_id' => $kurssi_id));
         $rows = $query->fetchAll();
-        $oppitunnit = array();
-
-        foreach ($rows as $row) {
-            $oppitunnit[] = new Oppitunti(array(
-                'id' => $row['id'],
-                'kurssi_id' => $row['kurssi_id'],
-                'otsikko' => $row['otsikko'],
-                'materiaali' => $row['materiaali'],
-                'rivi' => $row['rivi'],
-                'tyyppi' => $row['tyyppi']
-            ));
-        }
-
+        $oppitunnit = Oppitunti::oppitunnitFromRows($rows);
         return $oppitunnit;
     }
 

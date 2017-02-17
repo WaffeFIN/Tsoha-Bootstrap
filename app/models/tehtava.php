@@ -8,11 +8,8 @@ class Tehtava extends BaseModel {
         parent::__construct($attributes);
         $this->validators = array('validate_tehtavananto', 'validate_tehtavanumero');
     }
-
-    public static function all() {
-        $query = DB::connection()->prepare('SELECT * FROM Tehtava');
-        $query->execute();
-        $rows = $query->fetchAll();
+    
+    public static function tehtavatFromRows($rows){
         $tehtavat = array();
 
         foreach ($rows as $row) {
@@ -27,20 +24,20 @@ class Tehtava extends BaseModel {
         return $tehtavat;
     }
 
+    public static function all() {
+        $query = DB::connection()->prepare('SELECT * FROM Tehtava');
+        $query->execute();
+        $rows = $query->fetchAll();
+        $tehtavat = Tehtava::tehtavatFromRows($rows);
+
+        return $tehtavat;
+    }
+
     public static function oppituntiTehtavat($sarja_id) {
         $query = DB::connection()->prepare('SELECT * FROM Tehtava WHERE sarja_id=:sarja_id');
         $query->execute(array('sarja_id' => $sarja_id));
         $rows = $query->fetchAll();
-        $tehtavat = array();
-
-        foreach ($rows as $row) {
-            $tehtavat[] = new Tehtava(array(
-                'id' => $row['id'],
-                'sarja_id' => $row['sarja_id'],
-                'tehtavananto' => $row['tehtavananto'],
-                'tehtavanumero' => $row['tehtavanumero']
-            ));
-        }
+        $tehtavat = Tehtava::tehtavatFromRows($rows);
 
         return $tehtavat;
     }

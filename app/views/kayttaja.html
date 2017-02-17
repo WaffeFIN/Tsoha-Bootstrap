@@ -33,16 +33,52 @@
 </section>
 
 <section>
+    {% if kayttaja.oikeudet == 0 %}
+    <!--if op ILMOITTAUTUMISET SECTION-->
+    {% if kurssit %}
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr><td>Ilmoittautumiset:</td><td></td></tr>
+        </thead>
+        <tbody>
+            {% for kurssi in kurssit %}
+            <tr>
+                <td><a class="btn btn-primary" href="{{base_path}}/kurssi/{{kurssi.id}}">{{kurssi.nimi}}</a></td>
+        <form method="post" action="{{base_path}}/peru_ilmo">
+            <input type="hidden" name="kurssi_id" value="{{kurssi.id}}">
+            <td><button type="submit" class="btn btn-danger">Peru ilmoitus</button></td>
+        </form>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    Sinulla ei ole ilmoittautumisia
+    {% endif %}
+    {% else %}
+    <!--if kv KURSSIT SECTION-->
+    {% if kurssit %}
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr><td>Omat kurssit:</td></tr>
+        </thead>
+        <tbody>
+            {% for kurssi in kurssit %}
+            <tr>
+                <td><a class="btn btn-primary" href="{{base_path}}/kurssi/{{kurssi.id}}">{{kurssi.nimi}}</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    Sinulla ei ole omia kursseja
+    {% endif %}
+    {% endif %}
 </section>
-<!--if kv KURSSIT SECTION-->
 
-<section>
-</section>
-<!--if op ILMOITTAUTUMISET SECTION-->
-
-<section>
-</section>
 <!--PASSWORD CHANGE SECTION-->
+<section>
+</section>
 
 <a class="btn btn-default" href="{{base_path}}/aiheet">Aiheet</a>
 {% endblock %}
