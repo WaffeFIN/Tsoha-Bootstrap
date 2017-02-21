@@ -50,14 +50,6 @@ class Oppitunti extends BaseModel {
         return $oppitunnit;
     }
 
-    public static function allKurssi($kurssi_id) {
-        $query = DB::connection()->prepare('SELECT * FROM Oppitunti WHERE kurssi_id = :kurssi_id');
-        $query->execute(array('kurssi_id' => $kurssi_id));
-        $rows = $query->fetchAll();
-        $oppitunnit = Oppitunti::oppitunnitFromRows($rows);
-        return $oppitunnit;
-    }
-
     public static function find($id) {
         $query = DB::connection()->prepare('SELECT * FROM Oppitunti WHERE id = :id LIMIT 1');
         $query->execute(array('id' => $id));
@@ -67,7 +59,7 @@ class Oppitunti extends BaseModel {
     }
 
     public static function kurssiOppitunnit($kurssi_id) {
-        $query = DB::connection()->prepare('SELECT * FROM Oppitunti WHERE kurssi_id = :kurssi_id');
+        $query = DB::connection()->prepare('SELECT * FROM Oppitunti WHERE kurssi_id = :kurssi_id ORDER BY rivi, id ASC');
         $query->execute(array('kurssi_id' => $kurssi_id));
         $rows = $query->fetchAll();
         $oppitunnit = Oppitunti::oppitunnitFromRows($rows);

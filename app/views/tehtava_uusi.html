@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Briiffi</h1>
+<h2>Lisää tehtävä sarjalle {{sarja.otsikko}} kurssille {{kurssi.nimi}}</h2>
+
+<form method="post" action="{{base_path}}/tallenna_tehtava">
+    <div class="form-group">
+        <label>Tehtävänumero</label>
+        <input type="text" name="tehtavanumero" class="form-control" value="{{tehtava.tehtavanumero}}">
+    </div>
+
+    <div class="form-group">
+        <label>Tehtävänanto</label>
+        <textarea name="tehtavananto" class="form-control">{{tehtava.tehtavananto}}</textarea>
+    </div>
+
+    <input type="hidden" name="sarja_id" value="{{sarja.id}}">
+    <input type="hidden" name="id" value="{{tehtava.id}}">
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Lisää</button>
+    </div>
+</form>
+
+<a class="btn btn-default" href="{{base_path}}/kurssi/{{kurssi.id}}">Takaisin</a>
+{% endblock %}

@@ -23,12 +23,28 @@
     {{oppitunti.materiaali}}
 </section>
 
+{% if oppitunti.tyyppi == 1 %}
 {% if tehtavat %}
 {% for tehtava in tehtavat %}
 <section>
     <h4>{{tehtava.tehtavanumero}}. </h4><i>{{tehtava.tehtavananto}}</i><br><br>
+    {% if user_logged_in and user_logged_in.id == kurssi.kurssivastaava_id %}
+    <form method="post" action="{{base_path}}/muokkaa_tehtava">
+        <input type="hidden" name="sarja_id" value="{{oppitunti.id}}">
+        <input type="hidden" name="id" value="{{tehtava.id}}">
+        <button type="submit" class="btn btn-default">Muokkaa tehtävää</button>
+    </form>
+    {% endif %}
 </section>
 {% endfor %}
+{% endif %}
+{% if user_logged_in and user_logged_in.id == kurssi.kurssivastaava_id %}
+<form method="post" action="{{base_path}}/muokkaa_tehtava">
+    <input type="hidden" name="sarja_id" value="{{oppitunti.id}}">
+    <input type="hidden" name="id" value=0>
+    <button type="submit" class="btn btn-success">Lisää tehtävä</button>
+</form>
+{% endif %}
 {% endif %}
 
 <a class="btn btn-default" href="{{base_path}}/kurssi/{{oppitunti.kurssi_id}}">Takaisin</a>

@@ -14,8 +14,10 @@ class OppituntiController extends BaseController {
 
     public static function show($id) {
         $oppitunti = Oppitunti::find($id);
+        $kurssi = Kurssi::find($oppitunti->kurssi_id);
         $tehtavat = Tehtava::oppituntiTehtavat($id);
         View::make('oppitunti.html', array(
+            'kurssi' => $kurssi,
             'oppitunti' => $oppitunti,
             'tehtavat' => $tehtavat
         ));

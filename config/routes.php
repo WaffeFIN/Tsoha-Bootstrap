@@ -32,8 +32,16 @@ $routes->get('/kurssit_old/:aiheid', function($aiheid) {
     KurssiController::index_old($aiheid);
 });
 
-$routes->post('/uusi', function() {
+$routes->post('/uusi_oppitunti', function() {
     OppituntiController::store();
+});
+
+$routes->post('/muokkaa_tehtava', function() {
+    TehtavaController::edit();
+});
+
+$routes->post('/tallenna_tehtava', function() {
+    TehtavaController::store();
 });
 
 $routes->get('/uusi_ot/:id', function($id) {

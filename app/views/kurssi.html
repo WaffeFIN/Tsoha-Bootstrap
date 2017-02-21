@@ -30,7 +30,7 @@
     <tbody>
         {% if oppitunnit %}
         {% for oppitunti in oppitunnit %}
-        <tr> <!-- add tr /tr per row, set row value, if no oppitunti is found for row, terminate -->
+        <tr> 
             {% if oppitunti.tyyppi %}
             <td><a class="btn btn-danger" href="{{base_path}}/oppitunti/{{oppitunti.id}}">{{oppitunti.otsikko}}</a></td>
             {% else %}
