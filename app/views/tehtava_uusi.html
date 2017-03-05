@@ -1,8 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
 <h1>Briiffi</h1>
+{% if isUusi %}
 <h2>Lisää tehtävä sarjalle {{sarja.otsikko}} kurssille {{kurssi.nimi}}</h2>
-
+{% else %}
+<h2>Muokkaa tehtävää {{tehtava.tehtavanumero}}</h2>
+{% endif %}
 <form method="post" action="{{base_path}}/tallenna_tehtava">
     <div class="form-group">
         <label>Tehtävänumero</label>
@@ -18,9 +21,15 @@
     <input type="hidden" name="id" value="{{tehtava.id}}">
 
     <div class="form-group">
-        <button type="submit" class="btn btn-primary">Lisää</button>
+        <button type="submit" class="btn btn-primary">
+            {% if isUusi %}
+            Lisää
+            {% else %}
+            Tallenna
+            {% endif %}
+        </button>
     </div>
 </form>
 
-<a class="btn btn-default" href="{{base_path}}/kurssi/{{kurssi.id}}">Takaisin</a>
+<a class="btn btn-default" href="{{base_path}}/oppitunti/{{sarja.id}}">Takaisin</a>
 {% endblock %}

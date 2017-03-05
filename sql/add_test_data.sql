@@ -18,8 +18,8 @@ INSERT INTO Kurssi (aihe_id, kurssivastaava_id, nimi,yhteenveto,julkaistu,lisays
 -- Ilmoittautumiset
 INSERT INTO Ilmoittautuminen (kayttaja_id, kurssi_id, paivays) VALUES (1,2,NOW());
 INSERT INTO Ilmoittautuminen (kayttaja_id, kurssi_id, paivays) VALUES (1,4,NOW());
-INSERT INTO Ilmoittautuminen (kayttaja_id, kurssi_id, paivays) VALUES (2,4,NOW());
-INSERT INTO Ilmoittautuminen (kayttaja_id, kurssi_id, paivays) VALUES (2,5,NOW());
+INSERT INTO Ilmoittautuminen (kayttaja_id, kurssi_id, paivays) VALUES (4,4,NOW());
+INSERT INTO Ilmoittautuminen (kayttaja_id, kurssi_id, paivays) VALUES (4,5,NOW());
 
 -- Oppitunnit
 INSERT INTO Oppitunti (kurssi_id, otsikko, materiaali, tyyppi) VALUES (2, 'Viikko 1: Setup','Katsokaa materiaalista apua', 1);

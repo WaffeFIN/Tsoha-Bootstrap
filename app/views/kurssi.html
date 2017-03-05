@@ -90,4 +90,19 @@
 </table>
 
 <a class="btn btn-default" href="{{base_path}}/kurssit/{{kurssi.aihe_id}}">Takaisin</a>
+
+{% if user_logged_in and user_logged_in.id == kurssi.kurssivastaava_id %}
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <td>Ilmoittautuneet</td>
+        </tr>
+    </thead>
+    {% for opiskelija in opiskelijat %}
+        <tr>
+            <td>{{opiskelija.nimi}}</td>
+        </tr>
+    {% endfor %}
+</table>
+{% endif %}
 {% endblock %}

@@ -24,10 +24,14 @@ class KurssiController extends BaseController {
         } else {
             $oppitunnit = Oppitunti::kurssiOppitunnit($id);
             $kurssivastaava = Kayttaja::find($kurssi->kurssivastaava_id);
+
+            $opiskelijat = Kayttaja::allOpiskelijat($id);
+
             View::make('kurssi.html', array(
                 'kurssi' => $kurssi,
                 'oppitunnit' => $oppitunnit,
-                'kurssivastaava' => $kurssivastaava
+                'kurssivastaava' => $kurssivastaava,
+                'opiskelijat' => $opiskelijat
             ));
         }
     }
@@ -57,7 +61,7 @@ class KurssiController extends BaseController {
         $kurssi->hide();
         Redirect::to('/kurssi/' . $kurssi->id, array('message' => 'Kurssi ' . ($kurssi->nimi) . ' on piillotettu!'));
     }
-    
+
     public static function updateYhteenveto() {
         self::check_logged_in();
         $params = $_POST;

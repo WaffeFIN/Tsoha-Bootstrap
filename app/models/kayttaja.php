@@ -29,8 +29,7 @@ class Kayttaja extends BaseModel {
             return $kayttaja;
         }
         return null;
-    }
-    
+    }    
 
     public static function authenticate($kayttajatunnus, $salasana) {
         $query = DB::connection()->prepare('SELECT * FROM Kayttaja WHERE kayttajatunnus = :kayttajatunnus AND salasana = :salasana LIMIT 1');
@@ -48,6 +47,24 @@ class Kayttaja extends BaseModel {
         }
 
         return null;
+    }
+    
+    public function allOpiskelijat($kurssi_id) {
+        $query = DB::connection()->prepare('SELECT DISTINCT Kayttaja.id as id, Kayttaja.nimi as nimi, Kayttaja.oikeudet as oikeudet FROM Ilmoittautuminen INNER JOIN Kurssi ON kurssi_id = :kurssi_id INNER JOIN Kayttaja ON Kayttaja.id = kayttaja_id ORDER BY Kayttaja.nimi ASC');
+        $query->execute(array('kurssi_id' => $kurssi_id));
+        $rows = $query->fetchAll();
+        
+        $opiskelijat = array();
+
+        foreach ($rows as $row) {
+            $opiskelijat[] = new Kayttaja(array(
+                'id' => $row['id'],
+                'nimi' => $row['nimi'],
+                'oikeudet' => $row['oikeudet']
+            ));
+        }
+
+        return $opiskelijat;
     }
 
 }

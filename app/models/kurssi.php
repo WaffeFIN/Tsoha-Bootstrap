@@ -54,7 +54,7 @@ class Kurssi extends BaseModel {
     }
 
     public static function allAihe($aiheid) {
-        $query = DB::connection()->prepare('SELECT * FROM Kurssi WHERE aihe_id = :aiheid');
+        $query = DB::connection()->prepare('SELECT * FROM Kurssi WHERE aihe_id = :aiheid ORDER BY julkaistu DESC, lisays_pvm DESC');
         $query->execute(array('aiheid' => $aiheid));
         $rows = $query->fetchAll();
         $kurssit = Kurssi::kurssitFromRows($rows);
