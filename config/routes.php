@@ -44,6 +44,10 @@ $routes->post('/tallenna_tehtava', function() {
     TehtavaController::store();
 });
 
+$routes->post('/poista_tehtava', function() {
+    TehtavaController::destroy();
+});
+
 $routes->get('/uusi_ot/:id', function($id) {
     OppituntiController::uusi(0, $id);
 });

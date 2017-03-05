@@ -62,6 +62,17 @@ class TehtavaController extends BaseController {
         $tehtava = new Tehtava($attributes);
         return $tehtava;
     }
+    
+    
+    public static function destroy() {
+        self::check_logged_in();
+        $params = $_POST;
+
+        $tehtava = Tehtava::find($params['id']);
+        $tehtava->destroy();
+
+        Redirect::to('/oppitunti/' . $params['sarja_id'], array('message' => 'Tehtävä poistettu!'));
+    }
 
     public static function store() {
         self::check_logged_in();
