@@ -31,11 +31,13 @@
     </div>
 </form>
 
+{% if not isUusi %}
 <form method="post" action="{{base_path}}/poista_tehtava">
     <input type="hidden" name="sarja_id" value="{{sarja.id}}">
     <input type="hidden" name="id" value="{{tehtava.id}}">
     <button type="submit" class="btn btn-danger">Poista</button>
 </form>
+{% endif %}
 <br>
 <a class="btn btn-default" href="{{base_path}}/oppitunti/{{sarja.id}}">Takaisin</a>
 {% endblock %}

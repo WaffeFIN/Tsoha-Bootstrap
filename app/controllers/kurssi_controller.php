@@ -9,7 +9,7 @@ class KurssiController extends BaseController {
         $kurssit = Kurssi::allAihe($aihe_id);
         $kayttaja = self::get_user_logged_in();
         if ($kayttaja != null) {
-            $ilmoittautumiset = Kurssi::allIlmoittautuimsetId($kayttaja->id);
+            $ilmoittautumiset = Kurssi::allIlmoittautuimsetById($kayttaja->id);
 //            Kint::dump($ilmoittautumiset);
             View::make('kurssilista_kv.html', array('aihe_id' => $aihe_id, 'kurssit' => $kurssit, 'ilmoittautumiset' => $ilmoittautumiset));
         } else {
@@ -83,10 +83,8 @@ class KurssiController extends BaseController {
         $kurssi = new Kurssi($attributes);
         $errors = $kurssi->errors();
 
-
         if (count($errors) == 0) {
             $kurssi->save();
-
             Redirect::to('/kurssi/' . $kurssi->id, array('message' => 'Kurssi lisätty!'));
         } else {
             $aihe_id = $params['aihe_id'];

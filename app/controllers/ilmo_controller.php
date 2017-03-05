@@ -14,7 +14,7 @@ class IlmoController extends BaseController {
         $ilmo = Ilmoittautuminen::find($kayttaja->id, $kurssi->id);
         $ilmo->destroy();
 
-        Redirect::to('/kayttaja', array('message' => 'Ilmoittautuminen kurssille ' . $kurssi->nimi . ' peruttu!'));
+        Redirect::to('/kurssit/' . $kurssi->aihe_id, array('message' => 'Ilmoittautuminen kurssille ' . $kurssi->nimi . ' peruttu!'));
     }
 
     public static function signup() {

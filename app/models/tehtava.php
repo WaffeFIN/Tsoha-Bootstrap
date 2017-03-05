@@ -39,6 +39,15 @@ class Tehtava extends BaseModel {
         return null;
     }
 
+    public static function createDummyTehtava($sarja_id) {
+        $tehtava = new Tehtava(array(
+            'tehtavanumero' => "nro",
+            'tehtavananto' => "tehtävänanto",
+            'sarja_id' => $sarja_id
+        ));
+        return $tehtava;
+    }
+
     public static function all() {
         $query = DB::connection()->prepare('SELECT * FROM Tehtava');
         $query->execute();
@@ -63,17 +72,25 @@ class Tehtava extends BaseModel {
 
     public function saveOrUpdate() {
         if ($this->id != 0) {
-            $query = DB::connection()->prepare('UPDATE Tehtava SET tehtavanumero=:tehtavanumero, tehtavananto=:tehtavananto WHERE id=:id');
-            $query->execute(array('id' => $this->id, 'tehtavanumero' => $this->tehtavanumero, 'tehtavananto' => $this->tehtavananto));
+            $this->update();
         } else {
-            $query = DB::connection()->prepare('INSERT INTO Tehtava (sarja_id, tehtavanumero, tehtavananto) VALUES(:sarja_id, :tehtavanumero, :tehtavananto) RETURNING id');
-            $query->execute(array(
-                'sarja_id' => $this->sarja_id,
-                'tehtavanumero' => $this->tehtavanumero,
-                'tehtavananto' => $this->tehtavananto));
-            $row = $query->fetch();
-            $this->id = $row['id'];
+            $this->save();
         }
+    }
+
+    private function save() {
+        $query = DB::connection()->prepare('INSERT INTO Tehtava (sarja_id, tehtavanumero, tehtavananto) VALUES(:sarja_id, :tehtavanumero, :tehtavananto) RETURNING id');
+        $query->execute(array(
+            'sarja_id' => $this->sarja_id,
+            'tehtavanumero' => $this->tehtavanumero,
+            'tehtavananto' => $this->tehtavananto));
+        $row = $query->fetch();
+        $this->id = $row['id'];
+    }
+
+    private function update() {
+        $query = DB::connection()->prepare('UPDATE Tehtava SET tehtavanumero=:tehtavanumero, tehtavananto=:tehtavananto WHERE id=:id');
+        $query->execute(array('id' => $this->id, 'tehtavanumero' => $this->tehtavanumero, 'tehtavananto' => $this->tehtavananto));
     }
 
     public static function oppituntiTehtavat($sarja_id) {

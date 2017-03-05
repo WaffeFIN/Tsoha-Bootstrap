@@ -42,27 +42,16 @@ class TehtavaController extends BaseController {
     public static function getOrCreateTehtava($id, $sarja_id) {
         //if a tehtava with $id is found, return it, else return new tehtava
         if ($id == 0) {
-            $tehtava = self::createTehtava($sarja_id);
+            $tehtava = Tehtava::createDummyTehtava($sarja_id);
             return $tehtava;
         } else {
             $tehtava = Tehtava::find($id);
             if ($tehtava == null) {
-                $tehtava = self::createTehtava($sarja_id);
+                $tehtava = Tehtava::createDummyTehtava($sarja_id);
             }
             return $tehtava;
         }
-    }
-
-    private static function createTehtava($sarja_id) {
-        $attributes = array(
-            'tehtavanumero' => "nro",
-            'tehtavananto' => "tehtävänanto",
-            'sarja_id' => $sarja_id
-        );
-        $tehtava = new Tehtava($attributes);
-        return $tehtava;
-    }
-    
+    }    
     
     public static function destroy() {
         self::check_logged_in();
@@ -91,10 +80,11 @@ class TehtavaController extends BaseController {
             $tehtava->saveOrUpdate();
             Redirect::to('/oppitunti/' . $tehtava->sarja_id, array('message' => 'Tehtävä tallennettu!'));
         } else {
-            if ($tehtava)
+            if ($tehtava) {
                 Redirect::to('/oppitunti/' . $tehtava->sarja_id, array('errors' => $errors));
-            else
+            } else {
                 Redirect::to('/', array('errors' => $errors));
+            }
         }
     }
 

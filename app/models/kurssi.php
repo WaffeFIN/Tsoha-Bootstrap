@@ -121,13 +121,12 @@ class Kurssi extends BaseModel {
         return $kurssit;
     }
 
-    public function allIlmoittautuimsetId($kayttaja_id) {
+    public function allIlmoittautuimsetById($kayttaja_id) {
         $query = DB::connection()->prepare('SELECT kurssi_id FROM Ilmoittautuminen WHERE kayttaja_id = :kayttaja_id');
         $query->execute(array('kayttaja_id' => $kayttaja_id));
         $rows = $query->fetchAll();
 
         $ids = array();
-
         foreach ($rows as $row) {
             $ids[] = $row['kurssi_id'];
         }
