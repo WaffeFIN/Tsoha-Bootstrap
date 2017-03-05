@@ -23,23 +23,24 @@
     <thead>
         <tr>
             {% if user_logged_in and user_logged_in.id == kurssi.kurssivastaava_id %}
-            <form method="post" action="{{base_path}}/yhteenveto">
-            <td>
-                <textarea name="yhteenveto" class="form-control">{{kurssi.yhteenveto}}</textarea>
-            </td>
-            <td>
-                <input type="hidden" name="kurssi_id" value="{{kurssi.id}}">
-                <button type="submit" class="btn btn-primary">Tallenna yhteenveto</button>
-            </td>
-            </form>
-            {% else %}
-            <td>{{kurssi.yhteenveto}}</td>
-            <td>Kurssivastaava: {{kurssivastaava.nimi}}</td>
-            {% endif %}
-        </tr>
-    </thead>
+    <form method="post" action="{{base_path}}/yhteenveto">
+        <td>
+            <textarea name="yhteenveto" class="form-control">{{kurssi.yhteenveto}}</textarea>
+        </td>
+        <td>
+            <input type="hidden" name="kurssi_id" value="{{kurssi.id}}">
+            <button type="submit" class="btn btn-primary">Tallenna yhteenveto</button>
+        </td>
+    </form>
+    {% else %}
+    <td>{{kurssi.yhteenveto}}</td>
+    <td>Kurssivastaava: {{kurssivastaava.nimi}}</td>
+    {% endif %}
+</tr>
+</thead>
 <tbody>
     {% if oppitunnit %}
+    {% if user_logged_in %}
     {% for oppitunti in oppitunnit %}
     <tr> 
         {% if oppitunti.tyyppi %}
@@ -50,6 +51,21 @@
         <td></td>
     </tr>
     {% endfor %}
+    {% else %}
+    <tr>
+        <td>Kirjaudu sisään nähdäksesi kurssin tehtävät.</td>
+        <td></td>
+    </tr>
+    {% for oppitunti in oppitunnit %}
+    {% if oppitunti.tyyppi == 0 %}
+    <tr> 
+        <td><a class="btn btn-primary" href="{{base_path}}/oppitunti/{{oppitunti.id}}">{{oppitunti.otsikko}}</a></td>
+
+        <td></td>
+    </tr>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
     {% else %}
     <tr>
         <td>Kurssilla ei ole julkaistuja oppitunteja tai tehtäväsarjoja.</td>
@@ -99,9 +115,9 @@
         </tr>
     </thead>
     {% for opiskelija in opiskelijat %}
-        <tr>
-            <td>{{opiskelija.nimi}}</td>
-        </tr>
+    <tr>
+        <td>{{opiskelija.nimi}}</td>
+    </tr>
     {% endfor %}
 </table>
 {% endif %}
