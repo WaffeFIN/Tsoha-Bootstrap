@@ -37,8 +37,9 @@ class IlmoController extends BaseController {
             $ilmo->save();
 
             Redirect::to('/kurssit/' . $kurssi->aihe_id, array('message' => 'Olet ilmoittautunut kurssille ' . $kurssi->nimi));
-        } else
+        } else {
             Redirect::to('/kurssit/' . $kurssi->aihe_id, array('errors' => $errors));
+        }
     }
 
 }

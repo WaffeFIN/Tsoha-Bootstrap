@@ -7,7 +7,14 @@ class KurssiController extends BaseController {
 
     public static function index($aihe_id) {
         $kurssit = Kurssi::allAihe($aihe_id);
-        View::make('kurssilista_kv.html', array('aihe_id' => $aihe_id, 'kurssit' => $kurssit));
+        $kayttaja = self::get_user_logged_in();
+        if ($kayttaja != null) {
+            $ilmoittautumiset = Kurssi::allIlmoittautuimsetId($kayttaja->id);
+//            Kint::dump($ilmoittautumiset);
+            View::make('kurssilista_kv.html', array('aihe_id' => $aihe_id, 'kurssit' => $kurssit, 'ilmoittautumiset' => $ilmoittautumiset));
+        } else {
+            View::make('kurssilista_kv.html', array('aihe_id' => $aihe_id, 'kurssit' => $kurssit));
+        }
     }
 
     public static function show($id) {
@@ -16,9 +23,11 @@ class KurssiController extends BaseController {
             Redirect::to('/', array('message' => 'Kurssia ei löytynyt id:llä ' . $id));
         } else {
             $oppitunnit = Oppitunti::kurssiOppitunnit($id);
+            $kurssivastaava = Kayttaja::find($kurssi->kurssivastaava_id);
             View::make('kurssi.html', array(
                 'kurssi' => $kurssi,
-                'oppitunnit' => $oppitunnit
+                'oppitunnit' => $oppitunnit,
+                'kurssivastaava' => $kurssivastaava
             ));
         }
     }
@@ -47,6 +56,15 @@ class KurssiController extends BaseController {
         $kurssi = Kurssi::find($params['kurssi_id']);
         $kurssi->hide();
         Redirect::to('/kurssi/' . $kurssi->id, array('message' => 'Kurssi ' . ($kurssi->nimi) . ' on piillotettu!'));
+    }
+    
+    public static function updateYhteenveto() {
+        self::check_logged_in();
+        $params = $_POST;
+        $kurssi = Kurssi::find($params['kurssi_id']);
+        $kurssi->yhteenveto = $params['yhteenveto'];
+        $kurssi->updateYhteenveto();
+        Redirect::to('/kurssi/' . $kurssi->id, array('message' => 'Kurssin ' . ($kurssi->nimi) . ' yhteenveto on tallennettu!'));
     }
 
     public static function store() {

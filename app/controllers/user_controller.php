@@ -17,10 +17,11 @@ class UserController extends BaseController {
     }
 
     public static function login() {
-        if (self::get_user_logged_in() != null)
+        if (self::get_user_logged_in() != null) {
             Redirect::to('/aiheet');
-        else
+        } else {
             View::make('login.html');
+        }
     }
 
     public static function logout() {

@@ -44,7 +44,7 @@
             {% for kurssi in kurssit %}
             <tr>
                 <td><a class="btn btn-primary" href="{{base_path}}/kurssi/{{kurssi.id}}">{{kurssi.nimi}}</a></td>
-        <form method="post" action="{{base_path}}/peru_ilmo">
+        <form method="post" action="{{base_path}}/peru_ilmo" class="destroy-form" data-confirm="Oletko varma, että haluat poistaa ilmoittautumisen?">
             <input type="hidden" name="kurssi_id" value="{{kurssi.id}}">
             <td><button type="submit" class="btn btn-danger">Peru ilmoitus</button></td>
         </form>

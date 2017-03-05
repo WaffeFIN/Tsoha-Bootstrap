@@ -28,9 +28,9 @@ class Kayttaja extends BaseModel {
 
             return $kayttaja;
         }
-
         return null;
     }
+    
 
     public static function authenticate($kayttajatunnus, $salasana) {
         $query = DB::connection()->prepare('SELECT * FROM Kayttaja WHERE kayttajatunnus = :kayttajatunnus AND salasana = :salasana LIMIT 1');

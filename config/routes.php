@@ -68,6 +68,10 @@ $routes->post('/piillota', function() {
     KurssiController::hide();
 });
 
+$routes->post('/yhteenveto', function() {
+    KurssiController::updateYhteenveto();
+});
+
 $routes->get('/kurssi/:id', function($id) {
     KurssiController::show($id);
 });

@@ -81,7 +81,7 @@ class Kurssi extends BaseModel {
     }
 
     public function destroy() {
-        $oppitunnit = Oppitunti::allKurssi($this->id);
+        $oppitunnit = Oppitunti::kurssiOppitunnit($this->id);
         foreach ($oppitunnit as $oppitunti) {
             $oppitunti->destroy();
         }
@@ -99,6 +99,11 @@ class Kurssi extends BaseModel {
         $query->execute(array('id' => $this->id, 'false' => 'FALSE'));
     }
 
+    public function updateYhteenveto() {
+        $query = DB::connection()->prepare('UPDATE Kurssi SET yhteenveto=:yhteenveto WHERE id=:id');
+        $query->execute(array('id' => $this->id, 'yhteenveto' => $this->yhteenveto));
+    }
+
     public function save() {
         $query = DB::connection()->prepare('INSERT INTO Kurssi (nimi, aihe_id, kurssivastaava_id, lisays_pvm) VALUES (:nimi, :aihe_id, :kurssivastaava_id, NOW()) RETURNING id');
         $query->execute(array('nimi' => $this->nimi, 'aihe_id' => $this->aihe_id, 'kurssivastaava_id' => $this->kurssivastaava_id));
@@ -114,6 +119,20 @@ class Kurssi extends BaseModel {
         $kurssit = Kurssi::kurssitFromRows($rows);
 
         return $kurssit;
+    }
+
+    public function allIlmoittautuimsetId($kayttaja_id) {
+        $query = DB::connection()->prepare('SELECT kurssi_id FROM Ilmoittautuminen WHERE kayttaja_id = :kayttaja_id');
+        $query->execute(array('kayttaja_id' => $kayttaja_id));
+        $rows = $query->fetchAll();
+
+        $ids = array();
+
+        foreach ($rows as $row) {
+            $ids[] = $row['kurssi_id'];
+        }
+
+        return $ids;
     }
 
     public function allKurssivastaava($kayttaja_id) {

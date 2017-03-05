@@ -16,6 +16,9 @@ class TehtavaController extends BaseController {
         $errors = array();
         if ($sarja == null) {
             $errors[] = 'Tehtäväsarjaa ei löytynyt!';
+            Kint::dump($params);
+            Kint::dump($id);
+            Kint::dump($sarja_id);
         }
         $kurssi_id = $sarja->kurssi_id;
         $kurssi = Kurssi::find($kurssi_id);
@@ -37,8 +40,8 @@ class TehtavaController extends BaseController {
     public static function getOrCreateTehtava($id, $sarja_id) {
         if ($id == 0) {
             $attributes = array(
-                'tehtavanumero' => "T.nro",
-                'tehtavananto' => "Lisää tehtävänanto",
+                'tehtavanumero' => "nro",
+                'tehtavananto' => "tehtävänanto",
                 'sarja_id' => $sarja_id
             );
             $tehtava = new Tehtava($attributes);

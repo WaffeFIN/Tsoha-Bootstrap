@@ -22,56 +22,71 @@
 <table class="table table-bordered table-striped">
     <thead>
         <tr>
+            {% if user_logged_in and user_logged_in.id == kurssi.kurssivastaava_id %}
+            <form method="post" action="{{base_path}}/yhteenveto">
             <td>
-                {{kurssi.yhteenveto}}
+                <textarea name="yhteenveto" class="form-control">{{kurssi.yhteenveto}}</textarea>
             </td>
-        </tr>
-    </thead>
-    <tbody>
-        {% if oppitunnit %}
-        {% for oppitunti in oppitunnit %}
-        <tr> 
-            {% if oppitunti.tyyppi %}
-            <td><a class="btn btn-danger" href="{{base_path}}/oppitunti/{{oppitunti.id}}">{{oppitunti.otsikko}}</a></td>
+            <td>
+                <input type="hidden" name="kurssi_id" value="{{kurssi.id}}">
+                <button type="submit" class="btn btn-primary">Tallenna yhteenveto</button>
+            </td>
+            </form>
             {% else %}
-            <td><a class="btn btn-primary" href="{{base_path}}/oppitunti/{{oppitunti.id}}">{{oppitunti.otsikko}}</a></td>
+            <td>{{kurssi.yhteenveto}}</td>
+            <td>Kurssivastaava: {{kurssivastaava.nimi}}</td>
             {% endif %}
         </tr>
-        {% endfor %}
+    </thead>
+<tbody>
+    {% if oppitunnit %}
+    {% for oppitunti in oppitunnit %}
+    <tr> 
+        {% if oppitunti.tyyppi %}
+        <td><a class="btn btn-danger" href="{{base_path}}/oppitunti/{{oppitunti.id}}">{{oppitunti.otsikko}}</a></td>
         {% else %}
-        <tr>
-            <td>Kurssilla ei ole julkaistuja oppitunteja tai tehtäväsarjoja.</td>
-        </tr>
+        <td><a class="btn btn-primary" href="{{base_path}}/oppitunti/{{oppitunti.id}}">{{oppitunti.otsikko}}</a></td>
         {% endif %}
-        {% if user_logged_in and user_logged_in.id == kurssi.kurssivastaava_id%}
-        <tr>
-            <td>
-                <a class="btn btn-default" href="{{base_path}}/uusi_ot/{{kurssi.id}}">Lisää uusi oppitunti</a>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <a class="btn btn-default" href="{{base_path}}/uusi_ts/{{kurssi.id}}">Lisää uusi tehtäväsarja</a>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                {% if kurssi.julkaistu %}
-                <form method="post" action="{{base_path}}/piillota">
-                    <input type="hidden" name="kurssi_id" value="{{kurssi.id}}">
-                    <td><button type="submit" class="btn btn-danger">Piilota kurssi</button></td>
-                </form>
-                {% else %}
-                <form method="post" action="{{base_path}}/poisto" class="destroy-form" data-confirm="Oletko varma, että haluat pysyvästi poistaa kurssin {{kurssi.nimi}}?">
-                    <input type="hidden" name="aihe_id" value="{{kurssi.aihe_id}}">
-                    <input type="hidden" name="kurssi_id" value="{{kurssi.id}}">
-                    <td><button type="submit" class="btn btn-danger">Poista kurssi</button></td>
-                </form>
-                {% endif %}
-            </td>
-        </tr>
-        {% endif %}
-    </tbody>
+        <td></td>
+    </tr>
+    {% endfor %}
+    {% else %}
+    <tr>
+        <td>Kurssilla ei ole julkaistuja oppitunteja tai tehtäväsarjoja.</td>
+        <td></td>
+    </tr>
+    {% endif %}
+    {% if user_logged_in and user_logged_in.id == kurssi.kurssivastaava_id %}
+    <tr>
+        <td>
+            <a class="btn btn-default" href="{{base_path}}/uusi_ot/{{kurssi.id}}">Lisää uusi oppitunti</a>
+        </td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>
+            <a class="btn btn-default" href="{{base_path}}/uusi_ts/{{kurssi.id}}">Lisää uusi tehtäväsarja</a>
+        </td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>
+            {% if kurssi.julkaistu %}
+            <form method="post" action="{{base_path}}/piillota">
+                <input type="hidden" name="kurssi_id" value="{{kurssi.id}}">
+                <td><button type="submit" class="btn btn-danger">Sulje ilmoittautuminen kursille</button></td>
+            </form>
+            {% else %}
+            <form method="post" action="{{base_path}}/poisto" class="destroy-form" data-confirm="Oletko varma, että haluat pysyvästi poistaa kurssin {{kurssi.nimi}}?">
+                <input type="hidden" name="aihe_id" value="{{kurssi.aihe_id}}">
+                <input type="hidden" name="kurssi_id" value="{{kurssi.id}}">
+                <td><button type="submit" class="btn btn-danger">Poista kurssi</button></td>
+            </form>
+            {% endif %}
+        </td>
+    </tr>
+    {% endif %}
+</tbody>
 </table>
 
 <a class="btn btn-default" href="{{base_path}}/kurssit/{{kurssi.aihe_id}}">Takaisin</a>

@@ -78,6 +78,8 @@ class Oppitunti extends BaseModel {
     }
 
     public function destroy() {
+        $query = DB::connection()->prepare('DELETE FROM Tehtava WHERE sarja_id = :id');
+        $query->execute(array('id' => $this->id));
         $query = DB::connection()->prepare('DELETE FROM Oppitunti WHERE id = :id');
         $query->execute(array('id' => $this->id));
     }

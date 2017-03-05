@@ -3,6 +3,6 @@
 <h1>Briiffi</h1>
 <h2>Valitse aihe</h2>
 {% for aihe in aiheet %}
-<a class="btn btn-primary" href="{{base_path}}/kurssit/{{aihe.id}}">{{aihe.nimi}}</a>
+<a class="btn btn-primary" href="{{base_path}}/kurssit/{{aihe.id}}">{{aihe.nimi}}</a><br>
 {% endfor %}
 {% endblock %}
